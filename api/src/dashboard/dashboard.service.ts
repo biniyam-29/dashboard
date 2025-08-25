@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UpdateDashboardDto } from './dto/update-dashboard.dto';
 
 @Injectable()
 export class DashboardService {
@@ -9,4 +10,12 @@ export class DashboardService {
     return await this.prisma.dashboard.findMany();
   }
 
+  async update(id: number, updatedData: UpdateDashboardDto) {
+    return await this.prisma.dashboard.update({
+      where: {
+        id,
+      },
+      data: updatedData,
+    });
+  }
 }
