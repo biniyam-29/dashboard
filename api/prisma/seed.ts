@@ -622,3 +622,5 @@ async function seedData() {
       ],
     });
 }
+
+seedData();
