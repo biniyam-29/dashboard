@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch} from '@nestjs/common';
 import { DashboardService } from './dashboard.service';
 import { UpdateDashboardDto } from './dto/update-dashboard.dto';
 
@@ -15,6 +15,11 @@ export class DashboardController {
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdateDashboardDto,
   ) {
-    return this.dashboardService.update(id, data);
+    return await this.dashboardService.update(id, data);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    return await this.dashboardService.remove(id);
   }
 }

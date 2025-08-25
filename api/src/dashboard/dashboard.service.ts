@@ -18,4 +18,10 @@ export class DashboardService {
       data: updatedData,
     });
   }
+
+  async remove(id: number) { 
+    return await this.prisma.dashboard.delete({
+      where:{id}
+    })
+  }
 }
