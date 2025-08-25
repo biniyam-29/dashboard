@@ -1,13 +1,39 @@
+"use client";
+
 import { AppSidebar } from "@/components/app-sidebar";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { DataTable } from "@/components/data-table";
 import { SectionCards } from "@/components/section-cards";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useQuery } from "@tanstack/react-query";
 
-import data from "./api/data.json";
+// Define the type of your data
+interface TableData {
+  id: number;
+  header: string;
+  type: string;
+  status: string;
+  target: string;
+  limit: string;
+  reviewer: string;
+}
+
+async function fetchData(): Promise<TableData[]> {
+  const res = await fetch("http://localhost:3000");
+  if (!res.ok) throw new Error("Failed to fetch data");
+  return res.json();
+}
 
 export default function Page() {
+  const { data, isLoading, error } = useQuery<TableData[]>({
+    queryKey: ["tableData"],
+    queryFn: fetchData,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
+
   return (
     <SidebarProvider
       style={
@@ -27,7 +53,7 @@ export default function Page() {
               <div className="px-4 lg:px-6">
                 <ChartAreaInteractive />
               </div>
-              <DataTable data={data} />
+              <DataTable data={data || []} />
             </div>
           </div>
         </div>
