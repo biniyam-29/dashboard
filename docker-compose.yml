@@ -1,7 +1,7 @@
 services:
   api:
     build:
-      context: ${PWD}/api
+      context: ./api
       dockerfile: Dockerfile.api
     ports:
       - '3000:3000'
@@ -30,7 +30,7 @@ services:
 
   front-end:
     build:
-      context: ${PWD}/front-end
+      context: ./front-end
       dockerfile: Dockerfile.front
     ports:
       - '3002:3000'

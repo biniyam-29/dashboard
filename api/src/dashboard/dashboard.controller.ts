@@ -19,7 +19,7 @@ export class DashboardController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.dashboardService.remove(id);
   }
 }
