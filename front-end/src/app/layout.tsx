@@ -1,8 +1,7 @@
-// src/app/layout.tsx (Server Component)
 import type { Metadata } from "next";
 import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
-import ClientProvider from "./client-provide"; // create a separate client component
+import ClientProvider from "./client-provide"; 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
